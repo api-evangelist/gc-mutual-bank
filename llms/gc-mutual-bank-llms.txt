@@ -1,0 +1,27 @@
+# G&C Mutual Bank
+
+> G&C Mutual Bank is an Australian customer-owned mutual bank and authorised deposit-taking institution (ADI). It merged with Unity Bank (legal merge 7 March 2025; combined entity renamed Unity Bank Limited from 1 July 2025), and gcmutual.bank now redirects to unity.bank, while the G&C-branded digital-banking host (gcmutualbank.com.au) that serves its Open Banking API remains operational during brand consolidation. Under Australia's Consumer Data Right (CDR / Open Banking) the bank exposes a public, unauthenticated Product Reference Data (PRD) API conforming to the DSB Consumer Data Standards.
+
+## APIs
+- [CDR Product Reference Data API](https://unity.bank/about-us/corporate-information/open-banking/): Public, unauthenticated GET /banking/products and /banking/products/{productId} at https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1 — confirmed HTTP 200 with 25 products (74 total) at x-v 4/5.
+
+## Specs
+- [OpenAPI (CDS CDR Banking API v1.36.0)](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/openapi/gc-mutual-bank-cds-banking-products-openapi.yml): Shared DSB Consumer Data Standards contract the live endpoint conforms to (not bank-proprietary).
+
+## Artifacts
+- [Authentication](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/authentication/gc-mutual-bank-authentication.yml): PRD is public/unauthenticated; consumer data is OAuth2/OIDC FAPI gated to Accredited Data Recipients.
+- [OAuth Scopes](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/scopes/gc-mutual-bank-scopes.yml): CDR banking + common authorisation scopes.
+- [Conventions](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/conventions/gc-mutual-bank-conventions.yml): x-v versioning, page/page-size pagination, CDS error envelope.
+- [Error Catalog](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/errors/gc-mutual-bank-problem-types.yml): CDS urn:au-cds:error problem types.
+- [Conformance](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/conformance/gc-mutual-bank-conformance.yml): CDR Banking, OAuth2, OIDC, FAPI, CDS versioning/pagination.
+- [Lifecycle](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/lifecycle/gc-mutual-bank-lifecycle.yml): CDS version negotiation and deprecation.
+- [Data Model](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/data-model/gc-mutual-bank-data-model.yml): Banking product entity graph.
+- [MCP (candidate)](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/mcp/gc-mutual-bank-mcp.yml): Derived candidate tools over the public PRD operations.
+- [Agent Skill](https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/skills/gc-mutual-bank-list-products.md): Retrieve and compare banking products.
+
+## Docs
+- [Open Banking / CDR](https://unity.bank/about-us/corporate-information/open-banking/)
+- [DSB Consumer Data Standards](https://consumerdatastandardsaustralia.github.io/standards/)
+- [Website](https://unity.bank/)
+- [Privacy Policy](https://unity.bank/about-us/privacy/)
+- [Support](https://unity.bank/talk-to-us/contact-us/)

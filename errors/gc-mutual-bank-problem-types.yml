@@ -1,0 +1,69 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#error-codes
+format: cdr-error-list
+note: >-
+  G&C Mutual Bank's live endpoints conform to the shared DSB Consumer Data
+  Standards CDR Banking API. Errors are NOT RFC 9457 problem+json; they use the
+  CDS error envelope ResponseErrorListV2 { errors: [ { code, title, detail, meta } ] }
+  where code is a URN (urn:au-cds:error:cds-all:...). The problem types below are
+  derived from the documented 4xx responses on the public Product Reference Data
+  operations and enriched with the canonical CDS error URNs and remediation.
+envelope:
+  schema: ResponseErrorListV2
+  fields:
+    - code    # URN error code, e.g. urn:au-cds:error:cds-all:Field/Invalid
+    - title   # short human-readable summary
+    - detail  # explanation specific to the occurrence
+    - meta    # optional, e.g. urn extension for application-specific codes
+problems:
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/Invalid
+    title: Invalid Field
+    remediation: Correct the malformed query parameter value and retry.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/Missing
+    title: Missing Required Field
+    remediation: Supply the required field that was omitted from the request.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 400
+    code: urn:au-cds:error:cds-all:Header/Missing
+    title: Missing Required Header
+    remediation: Include the mandatory x-v header specifying the API version.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 400
+    code: urn:au-cds:error:cds-all:Header/InvalidVersion
+    title: Invalid Version
+    remediation: Send an integer x-v header (e.g. 4). Non-integer versions are rejected.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/InvalidDateTime
+    title: Invalid Date
+    remediation: Format the updated-since parameter as an RFC 3339 DateString.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 400
+    code: urn:au-cds:error:cds-all:Field/InvalidPageSize
+    title: Invalid Page Size
+    remediation: Use a page-size between 1 and 1000.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 404
+    code: urn:au-cds:error:cds-all:Resource/NotFound
+    title: Resource Not Found
+    remediation: The requested productId does not exist. Use a productId returned by GET /banking/products.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#getBankingProductDetail
+  - status: 406
+    code: urn:au-cds:error:cds-all:Header/UnsupportedVersion
+    title: Unsupported Version
+    remediation: >-
+      Request a supported version. This endpoint serves x-v 4 and 5; x-v 3 and
+      below are rejected with 406 UnsupportedVersion.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - status: 422
+    code: urn:au-cds:error:cds-all:Field/InvalidPage
+    title: Invalid Page
+    remediation: >-
+      Request a page within range. The live PRD returns meta.totalPages
+      (3 at page-size 25); do not request a page beyond that.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts

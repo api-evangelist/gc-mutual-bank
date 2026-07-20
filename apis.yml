@@ -24,7 +24,7 @@ tags:
 - Mutual Bank
 - Australia
 created: '2026-07-20'
-modified: '2026-07-20'
+modified: '2026-07-20T00:00:00Z'
 specificationVersion: '0.19'
 apis:
 - aid: gc-mutual-bank:gc-mutual-bank-cdr-product-reference-data-api
@@ -53,6 +53,32 @@ apis:
     The contract is the shared DSB Consumer Data Standards CDR Banking API, not a bank-proprietary
     specification.
 common:
+- type: AgenticAccess
+  url: agentic-access/gc-mutual-bank-agentic-access.yml
+- type: DomainSecurity
+  url: security/gc-mutual-bank-domain-security.yml
+- type: Authentication
+  url: authentication/gc-mutual-bank-authentication.yml
+- type: OAuthScopes
+  url: scopes/gc-mutual-bank-scopes.yml
+- type: Conventions
+  url: conventions/gc-mutual-bank-conventions.yml
+- type: ErrorCatalog
+  url: errors/gc-mutual-bank-problem-types.yml
+- type: Conformance
+  url: conformance/gc-mutual-bank-conformance.yml
+- type: Lifecycle
+  url: lifecycle/gc-mutual-bank-lifecycle.yml
+- type: MCPServer
+  url: mcp/gc-mutual-bank-mcp.yml
+- type: LLMsTxt
+  url: llms/gc-mutual-bank-llms.txt
+- type: Overlay
+  url: overlays/gc-mutual-bank-cds-banking-products-overlay.yaml
+- type: DataModel
+  url: data-model/gc-mutual-bank-data-model.yml
+- type: AgentSkill
+  url: skills/_index.yml
 - type: Website
   url: https://unity.bank/
 - type: Documentation

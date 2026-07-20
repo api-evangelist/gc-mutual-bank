@@ -1,0 +1,55 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#http-headers
+note: >-
+  Cross-cutting request/response semantics for G&C Mutual Bank's CDR Banking API
+  surface, derived from the OpenAPI and the shared DSB Consumer Data Standards and
+  confirmed against the live public PRD endpoint. Conventions are those of the CDS,
+  not bank-proprietary.
+authentication:
+  public_prd: none          # Product Reference Data is public and unauthenticated
+  consumer_data: oauth2-oidc-fapi   # accounts/transactions gated to Accredited Data Recipients
+  see: authentication/gc-mutual-bank-authentication.yml
+versioning:
+  style: header
+  request_header: x-v         # mandatory; integer, highest supported version requested
+  min_version_header: x-min-v # optional; lowest acceptable version
+  response_header: x-v        # echoes the version actually served
+  supported: [4, 5]           # confirmed on GET /banking/products (x-v 3 -> 406)
+  negotiation: >-
+    Server serves the highest version between x-min-v and x-v that it supports;
+    UnsupportedVersion (406) when none is available.
+pagination:
+  style: page-number
+  params:
+    page: page               # 1-based page number
+    page_size: page-size     # default 25, max 1000
+  response_fields:
+    - meta.totalRecords      # confirmed 74 on live PRD
+    - meta.totalPages        # confirmed 3 at page-size 25
+    - links.first
+    - links.prev
+    - links.next
+    - links.last
+    - links.self
+error_envelope:
+  schema: ResponseErrorListV2
+  shape: '{ errors: [ { code, title, detail, meta } ] }'
+  code_style: urn            # urn:au-cds:error:cds-all:<Category>/<Type>
+  see: errors/gc-mutual-bank-problem-types.yml
+idempotency:
+  supported: false
+  note: >-
+    The public surface is read-only (GET). CDS defines no idempotency-key header
+    for banking reads; the POST operations in the standard are non-mutating batch
+    reads (list balances / direct-debits / scheduled payments for specific accounts).
+rate_limiting:
+  documented: false
+  note: >-
+    CDS defines traffic-thresholds obligations for Data Holders but the public PRD
+    endpoint advertises no rate-limit response headers.
+request_tracing:
+  interaction_id_header: x-fapi-interaction-id   # CDS/FAPI correlation id (authenticated surface)
+metadata:
+  self_link: links.self on every collection and resource response

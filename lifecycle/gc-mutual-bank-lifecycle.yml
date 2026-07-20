@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/
+docs: https://unity.bank/about-us/corporate-information/open-banking/
+note: >-
+  Lifecycle for G&C Mutual Bank's CDR Banking API surface. The bank publishes no
+  bank-proprietary versioning or deprecation policy; version lifecycle is governed
+  by the DSB Consumer Data Standards it conforms to. The bank merged with Unity Bank
+  (legal merge 7 March 2025; entity renamed Unity Bank Limited from 1 July 2025) and
+  is consolidating brands - the G&C-branded digital-banking host that serves the PRD
+  API remains operational during the transition.
+versioning:
+  scheme: header-endpoint-version
+  current: 4
+  supported: [4, 5]
+  mechanism: >-
+    Per-endpoint integer versions negotiated with x-v / x-min-v headers, released
+    through the DSB Consumer Data Standards. Products endpoint confirmed serving x-v 4 and 5.
+  docs: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+deprecation:
+  policy_url: https://consumerdatastandardsaustralia.github.io/standards/#versioning
+  mechanism: >-
+    Endpoint versions are retired via CDS releases; obsolete versions are rejected
+    with 406 Header/UnsupportedVersion (confirmed: x-v 3 returns 406). No RFC 8594
+    Sunset/Deprecation response headers observed on the public PRD surface.
+  sunset_header: false
+sla:
+  url: null
+  note: Data Holder availability/performance obligations are set by CDR rules; no public SLA page for this brand.
+status_page:
+  url: null
+  note: >-
+    No dedicated status page found for the G&C / Unity brand. The CDS defines
+    GET /discovery/status and /discovery/outages Data Holder endpoints, but no
+    public status dashboard is published under this brand.
+deprecated_operations: []

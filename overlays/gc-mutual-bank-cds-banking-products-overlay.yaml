@@ -1,0 +1,25 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for G&C Mutual Bank CDR Banking API
+  version: 1.0.0
+extends: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: gc-mutual-bank
+      x-apievangelist-note: >-
+        Shared DSB Consumer Data Standards CDR Banking API (v1.36.0). Only the
+        public Product Reference Data operations are reachable without CDR ADR
+        accreditation. Confirmed live at the server below on 2026-07-20.
+      x-apievangelist-spec-provenance: DSB Consumer Data Standards - not bank-proprietary.
+  - target: $.servers
+    update:
+      - url: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1
+        description: G&C Mutual Bank production (confirmed HTTP 200 on /banking/products, x-v 4/5)
+  - target: $.paths['/banking/products'].get
+    update:
+      x-apievangelist-access: public-unauthenticated
+      x-apievangelist-confirmed: 'HTTP 200, x-v 4, meta.totalRecords 74, meta.totalPages 3'
+  - target: $.paths['/banking/products/{productId}'].get
+    update:
+      x-apievangelist-access: public-unauthenticated

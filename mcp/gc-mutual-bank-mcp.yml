@@ -1,0 +1,29 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+status: candidate
+note: >-
+  No official hosted MCP server is published by G&C Mutual Bank / Unity Bank. This
+  is a DERIVED candidate tool list covering only the PUBLIC, unauthenticated Product
+  Reference Data operations - the surface an agent can reach without CDR ADR
+  accreditation. The authenticated consumer-data operations are deliberately
+  excluded (they require Accredited Data Recipient status + consumer consent).
+server:
+  name: gc-mutual-bank
+  transport: http
+  url: null   # not published
+  base: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1
+  required_headers:
+    x-v: '4'    # or 5
+tools:
+  - name: list_banking_products
+    description: >-
+      List G&C Mutual Bank's publicly offered banking products (eligibility,
+      features, pricing, rates, links to terms). Supports product-category, brand,
+      effective, updated-since filters and page / page-size pagination.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#listBankingProducts
+  - name: get_banking_product_detail
+    description: >-
+      Get the full detail for one banking product by productId, including rates,
+      fees, features, constraints, eligibility and deposit/lending rates.
+    source_operation: openapi/gc-mutual-bank-cds-banking-products-openapi.yml#getBankingProductDetail

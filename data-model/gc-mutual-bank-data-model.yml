@@ -1,0 +1,94 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/#banking-apis
+note: >-
+  Entity-relationship graph derived from the CDS CDR Banking API schemas. The
+  public Product Reference Data surface exposes the Product entity and its detail
+  sub-entities; the account/transaction entities belong to the authenticated
+  consumer-data surface (included for completeness, id-reference relationships
+  from the OpenAPI schemas).
+entities:
+  - name: BankingProduct
+    schema: BankingProductV6
+    id: productId
+    surface: public
+    description: A banking product offered by the bank (list view).
+  - name: BankingProductDetail
+    schema: BankingProductDetailV7
+    id: productId
+    surface: public
+    description: Full product detail (extends BankingProductV6 with rate/fee/feature/eligibility sub-objects).
+  - name: BankingAccount
+    schema: BankingAccountV3
+    id: accountId
+    surface: authenticated
+  - name: BankingTransaction
+    schema: BankingTransactionV2
+    id: transactionId
+    surface: authenticated
+  - name: BankingPayee
+    schema: BankingPayeeV2
+    id: payeeId
+    surface: authenticated
+relationships:
+  - from: BankingProductDetail
+    to: BankingProductLendingRate
+    kind: has_many
+    via: lendingRates
+  - from: BankingProductDetail
+    to: BankingProductDepositRate
+    kind: has_many
+    via: depositRates
+  - from: BankingProductDetail
+    to: BankingProductFeature
+    kind: has_many
+    via: features
+  - from: BankingProductDetail
+    to: BankingProductFee
+    kind: has_many
+    via: fees
+  - from: BankingProductDetail
+    to: BankingProductConstraint
+    kind: has_many
+    via: constraints
+  - from: BankingProductDetail
+    to: BankingProductEligibility
+    kind: has_many
+    via: eligibility
+  - from: BankingProductDetail
+    to: BankingProductAdditionalInformation
+    kind: has_one
+    via: additionalInformation
+  - from: BankingProductDetail
+    to: BankingProductCardArt
+    kind: has_many
+    via: cardArt
+  - from: BankingProductDetail
+    to: BankingProductBundle
+    kind: has_many
+    via: bundles
+  - from: BankingProductLendingRate
+    to: BankingProductRateTier
+    kind: has_many
+    via: tiers
+  - from: BankingProductDepositRate
+    to: BankingProductRateTier
+    kind: has_many
+    via: tiers
+  - from: BankingProductRateTier
+    to: BankingProductRateCondition
+    kind: has_one
+    via: applicabilityConditions
+  - from: BankingProductFee
+    to: BankingProductDiscount
+    kind: has_many
+    via: discounts
+  - from: BankingTransaction
+    to: BankingAccount
+    kind: belongs_to
+    via: accountId
+  - from: BankingTransaction
+    to: BankingProductInstalments
+    kind: belongs_to
+    via: instalmentPlanId

@@ -1,0 +1,36 @@
+generated: '2026-07-20'
+method: searched
+source: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+docs: https://consumerdatastandardsaustralia.github.io/standards/#authorisation-scopes
+note: >-
+  The public Product Reference Data surface requires NO scopes (unauthenticated).
+  The scopes below are the DSB Consumer Data Standards CDR banking + common
+  authorisation scopes that G&C Mutual Bank grants as a CDR Data Holder for the
+  authenticated consumer-data surface. They are standard CDR scopes (not
+  bank-proprietary) documented by the DSB; the harvested OpenAPI declares no
+  oauth2 securitySchemes so these are captured from the standard, not derived.
+schemes:
+  - name: CDRConsumerDataAccess
+    type: oauth2
+    profile: FAPI 1.0 Advanced (OIDC hybrid)
+    authorizationUrl: per Data Holder InfoSec (published via OIDC discovery)
+    tokenUrl: per Data Holder InfoSec (published via OIDC discovery)
+scopes:
+  - scope: openid
+    description: OIDC authentication of the consumer.
+  - scope: profile
+    description: Basic OIDC profile claims.
+  - scope: bank:accounts.basic:read
+    description: Read basic account information (account list, product category, balances).
+  - scope: bank:accounts.detail:read
+    description: Read detailed account information (account terms, features, addresses).
+  - scope: bank:transactions:read
+    description: Read account transactions.
+  - scope: bank:payees:read
+    description: Read saved payees.
+  - scope: bank:regular_payments:read
+    description: Read direct debits and scheduled/recurring payments.
+  - scope: common:customer.basic:read
+    description: Read basic customer information (name, occupation / organisation type).
+  - scope: common:customer.detail:read
+    description: Read detailed customer information (contact details, addresses).

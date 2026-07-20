@@ -1,0 +1,46 @@
+generated: '2026-07-20'
+method: derived
+source: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+docs: https://consumerdatastandardsaustralia.github.io/standards/
+note: >-
+  Standards conformance for G&C Mutual Bank's public API surface. The bank's live
+  endpoint conforms to the shared DSB Consumer Data Standards CDR Banking API
+  (OpenAPI 3.0.3, info.version 1.36.0). Booleans below reflect the standard the
+  bank implements as an active Australian ADI / CDR Data Holder; the authenticated
+  consumer-data surface (accounts, transactions) additionally conforms to the CDR
+  InfoSec (FAPI/OIDC) profile though it was not probed as it is out of public scope.
+standards:
+  - id: cdr-banking-api
+    conforms: true
+    evidence: >-
+      Live PRD endpoint returns HTTP 200 conforming to CDS CDR Banking API v1.36.0
+      at /cds-au/v1/banking/products with x-v 4/5.
+  - id: consumer-data-right
+    conforms: true
+    evidence: Active Australian ADI exposing the mandated public Product Reference Data API under the CDR regime.
+  - id: cds-error-list-v2
+    conforms: true
+    evidence: 4xx responses use the CDS ResponseErrorListV2 envelope with urn:au-cds:error codes.
+  - id: cds-versioning
+    conforms: true
+    evidence: Endpoints require x-v request header and echo x-v response header per CDS version negotiation.
+  - id: cds-pagination
+    conforms: true
+    evidence: page / page-size query params with meta.totalRecords, meta.totalPages and links.first/prev/next/last.
+  - id: oauth2
+    conforms: true
+    evidence: >-
+      Authenticated consumer-data surface is gated to Accredited Data Recipients via
+      OAuth2 per CDR InfoSec (not exercised on the public PRD surface).
+  - id: openid-connect
+    conforms: true
+    evidence: CDR InfoSec uses OIDC hybrid flow for consumer authorisation (authenticated surface only).
+  - id: fapi
+    conforms: true
+    evidence: CDR InfoSec mandates the FAPI 1.0 Advanced profile for the consumer-data surface.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: CDR uses the CDS ResponseErrorListV2 error envelope, not application/problem+json.
+  - id: mutual-tls
+    conforms: true
+    evidence: CDS server binding is MTLS (servers[].description "MTLS"); holder-of-key MTLS is required for the authenticated surface.
