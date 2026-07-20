@@ -1,0 +1,70 @@
+aid: gc-mutual-bank
+url: https://raw.githubusercontent.com/api-evangelist/gc-mutual-bank/refs/heads/main/apis.yml
+name: G&C Mutual Bank
+kind: company
+description: G&C Mutual Bank is an Australian customer-owned mutual bank and authorised
+  deposit-taking institution (ADI) providing retail and business banking to its members,
+  including home loans, transaction and savings accounts, and credit cards. It merged
+  with Unity Bank effective 7 March 2025, with the combined entity renamed Unity Bank
+  Limited from 1 July 2025; the G&C Mutual Bank brand and its digital banking host
+  (gcmutualbank.com.au) remain operational during the multi-brand consolidation, while
+  the public website gcmutual.bank now redirects to unity.bank. Under Australia's Consumer
+  Data Right (CDR / Open Banking) the bank exposes a public, unauthenticated Product
+  Reference Data (PRD) API conforming to the Data Standards Body (DSB) Consumer Data
+  Standards, alongside the authenticated consumer-data (accounts and transactions)
+  surface that is restricted to accredited data recipients under the CDR ADR model.
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+tags:
+- Financial
+- Banks
+- Open Banking
+- CDR
+- Consumer Data Right
+- Consumer Banking
+- Mutual Bank
+- Australia
+created: '2026-07-20'
+modified: '2026-07-20'
+specificationVersion: '0.19'
+apis:
+- aid: gc-mutual-bank:gc-mutual-bank-cdr-product-reference-data-api
+  name: G&C Mutual Bank CDR Product Reference Data API
+  tags:
+  - CDR
+  - Open Banking
+  - Product Reference Data
+  - Banking Products
+  - Public API
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://unity.bank/about-us/corporate-information/open-banking/
+  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1
+  properties:
+  - url: https://unity.bank/about-us/corporate-information/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-products
+    type: APIReference
+  - url: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Public, unauthenticated Consumer Data Right Product Reference Data (PRD)
+    API exposing G&C Mutual Bank's banking products - eligibility, features, pricing,
+    rates, and links to terms - via GET /banking/products and GET /banking/products/{productId}
+    under the standard CDS path /cds-au/v1/banking/products. Confirmed live returning
+    HTTP 200 with 25 products at supported header version x-v 4 (x-v 4 and 5 available).
+    The contract is the shared DSB Consumer Data Standards CDR Banking API, not a bank-proprietary
+    specification.
+common:
+- type: Website
+  url: https://unity.bank/
+- type: Documentation
+  url: https://unity.bank/about-us/corporate-information/open-banking/
+- type: PrivacyPolicy
+  url: https://unity.bank/about-us/privacy/
+- type: Support
+  url: https://unity.bank/talk-to-us/contact-us/
+- type: Blog
+  url: https://unity.bank/latest-news/
+- type: LinkedIn
+  url: https://www.linkedin.com/company/unity-bank
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com

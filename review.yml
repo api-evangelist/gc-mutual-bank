@@ -1,0 +1,80 @@
+aid: gc-mutual-bank
+name: G&C Mutual Bank
+review:
+  question: Does G&C Mutual Bank expose a confirmed public API surface, and what is its posture?
+  answer: true
+  date: '2026-07-20'
+  reviewer: API Evangelist
+  cdrPrdConfirmed: true
+findings:
+  summary: |
+    G&C Mutual Bank exposes exactly one public, unauthenticated API: the
+    Consumer Data Right (CDR / Open Banking) Product Reference Data (PRD)
+    endpoint required of every active Australian ADI. It was confirmed live
+    on 2026-07-20 returning HTTP 200 with a JSON body containing a
+    data.products array of 25 products and an x-v: 4 response header, served
+    from https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1 at the
+    standard CDS path /banking/products. There is no self-service developer
+    portal, API key program, SDKs, or bank-proprietary OpenAPI download; the
+    bank does not run an Up-style or NAB/CommBank-style consumer developer
+    platform. The bank merged with Unity Bank (legal merge 7 March 2025,
+    entity renamed Unity Bank Limited from 1 July 2025) and the public
+    website gcmutual.bank now redirects to unity.bank, though the G&C-branded
+    digital banking host that serves the PRD API remains operational during
+    the multi-brand transition.
+  cdrPosture:
+    prdConfirmed: true
+    confirmedBaseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1
+    productsEndpoint: GET /banking/products
+    productDetailEndpoint: GET /banking/products/{productId}
+    httpStatus: 200
+    supportedVersions: x-v 4 and x-v 5 (server rejects x-v 3 with 406 UnsupportedVersion)
+    productCount: 25
+    authModelPublicData: None - PRD is public and unauthenticated per CDR rules.
+    authModelConsumerData: |
+      Consumer data (accounts, transactions, balances) is NOT public. Under
+      the CDR it is gated to Accredited Data Recipients (ADRs) via the
+      OAuth2 / OpenID Connect FAPI profile and consumer consent flows defined
+      by the DSB Consumer Data Standards; that surface was not probed as it
+      is out of public scope.
+    specProvenance: |
+      No bank-proprietary OpenAPI/Swagger is published. The harvested spec is
+      the SHARED DSB Consumer Data Standards "CDR Banking API" (OpenAPI 3.0.3,
+      info.version 1.36.0), captured verbatim from the Consumer Data Standards
+      Australia standards repository, NOT a G&C Mutual Bank proprietary
+      contract. The bank's live endpoint conforms to this standard.
+  developerPortal: false
+  developerPortalNote: |
+    No dedicated developer.gcmutual.bank / developer.unity.bank portal was
+    found. The closest public documentation is the bank's Open Banking page
+    at https://unity.bank/about-us/corporate-information/open-banking/.
+  transports:
+    - protocol: REST
+      scheme: https
+      baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1
+      documented: true
+      note: CDR Product Reference Data endpoints, confirmed HTTP 200.
+    - protocol: WebSocket
+      scheme: wss
+      documented: false
+      note: No WebSocket surface; CDR banking is REST/JSON only.
+  endpointsConfirmed:
+    - GET https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/products (HTTP 200, x-v 4, 25 products)
+    - GET https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/products/{productId} (requires x-v header; 406 without)
+sources:
+  - url: https://unity.bank/about-us/corporate-information/open-banking/
+    type: Documentation
+    note: Bank's Open Banking / CDR page (HTTP 200).
+  - url: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/products
+    type: APIReference
+    note: Live PRD endpoint, confirmed HTTP 200 with 25 products at x-v 4.
+  - url: https://consumerdatastandardsaustralia.github.io/standards/
+    type: Documentation
+    note: DSB Consumer Data Standards - the shared CDR Banking API contract this endpoint conforms to.
+  - url: https://www.gcmutual.bank/your-bank-your-news/articles/merger-of-unity-bank-gc-mutual-bank/
+    type: Documentation
+    note: G&C Mutual Bank / Unity Bank merger announcement.
+actions:
+  openapiPath: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+  openapiProvenance: DSB Consumer Data Standards CDR Banking API (OpenAPI 3.0.3, v1.36.0) - shared standard, not bank-proprietary.
+  apisYmlUpdated: true
