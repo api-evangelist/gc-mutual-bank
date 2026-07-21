@@ -24,7 +24,7 @@ tags:
 - Mutual Bank
 - Australia
 created: '2026-07-20'
-modified: '2026-07-20T00:00:00Z'
+modified: '2026-07-21T00:00:00Z'
 specificationVersion: '0.19'
 apis:
 - aid: gc-mutual-bank:gc-mutual-bank-cdr-product-reference-data-api
@@ -37,7 +37,7 @@ apis:
   - Public API
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
   humanURL: https://unity.bank/about-us/corporate-information/open-banking/
-  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1
+  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/products
   properties:
   - url: https://unity.bank/about-us/corporate-information/open-banking/
     type: Documentation
@@ -49,8 +49,107 @@ apis:
     API exposing G&C Mutual Bank's banking products - eligibility, features, pricing,
     rates, and links to terms - via GET /banking/products and GET /banking/products/{productId}
     under the standard CDS path /cds-au/v1/banking/products. Confirmed live returning
-    HTTP 200 with 25 products at supported header version x-v 4 (x-v 4 and 5 available).
-    The contract is the shared DSB Consumer Data Standards CDR Banking API, not a bank-proprietary
+    HTTP 200 at supported header version x-v 4 (x-v 4 and 5 available; x-v 3 rejected
+    406 UnsupportedVersion). The contract is the shared DSB Consumer Data Standards
+    CDR Banking API, not a bank-proprietary specification.
+- aid: gc-mutual-bank:gc-mutual-bank-cdr-accounts-balances-api
+  name: G&C Mutual Bank CDR Accounts & Balances API
+  tags:
+  - CDR
+  - Open Banking
+  - Accounts
+  - Balances
+  - Consumer Authorized
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://unity.bank/about-us/corporate-information/open-banking/
+  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/accounts
+  properties:
+  - url: https://unity.bank/about-us/corporate-information/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-accounts
+    type: APIReference
+  - url: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right accounts and balances surface
+    exposing GET /banking/accounts, GET /banking/accounts/balances (bulk), GET /banking/accounts/{accountId}/balance,
+    and GET /banking/accounts/{accountId} (account detail). Access requires an accredited
+    data recipient (ADR) acting on a consumer's authorization under the CDR consent
+    model; unauthenticated calls are rejected with HTTP 401 (confirmed live). The contract
+    is the shared DSB Consumer Data Standards CDR Banking API v1.36.0, not a bank-proprietary
+    specification.
+- aid: gc-mutual-bank:gc-mutual-bank-cdr-transactions-api
+  name: G&C Mutual Bank CDR Transactions API
+  tags:
+  - CDR
+  - Open Banking
+  - Transactions
+  - Account Data
+  - Consumer Authorized
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://unity.bank/about-us/corporate-information/open-banking/
+  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/accounts
+  properties:
+  - url: https://unity.bank/about-us/corporate-information/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-transactions-for-account
+    type: APIReference
+  - url: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right transactions surface exposing
+    GET /banking/accounts/{accountId}/transactions (with filtering by date, amount,
+    and text) and GET /banking/accounts/{accountId}/transactions/{transactionId} for
+    full transaction detail. Access requires an accredited data recipient (ADR) acting
+    on a consumer's authorization under the CDR consent model. The contract is the
+    shared DSB Consumer Data Standards CDR Banking API v1.36.0, not a bank-proprietary
+    specification.
+- aid: gc-mutual-bank:gc-mutual-bank-cdr-direct-debits-scheduled-payments-api
+  name: G&C Mutual Bank CDR Direct Debits & Scheduled Payments API
+  tags:
+  - CDR
+  - Open Banking
+  - Direct Debits
+  - Scheduled Payments
+  - Consumer Authorized
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://unity.bank/about-us/corporate-information/open-banking/
+  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/accounts
+  properties:
+  - url: https://unity.bank/about-us/corporate-information/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-direct-debits-for-account
+    type: APIReference
+  - url: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right recurring-payments surface exposing
+    direct debits (GET /banking/accounts/{accountId}/direct-debits and the bulk POST
+    /banking/accounts/direct-debits) and scheduled payments (GET /banking/accounts/{accountId}/payments/scheduled
+    and the bulk POST /banking/payments/scheduled). Access requires an accredited data
+    recipient (ADR) acting on a consumer's authorization under the CDR consent model.
+    The contract is the shared DSB Consumer Data Standards CDR Banking API v1.36.0,
+    not a bank-proprietary specification.
+- aid: gc-mutual-bank:gc-mutual-bank-cdr-payees-api
+  name: G&C Mutual Bank CDR Payees API
+  tags:
+  - CDR
+  - Open Banking
+  - Payees
+  - Account Data
+  - Consumer Authorized
+  image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+  humanURL: https://unity.bank/about-us/corporate-information/open-banking/
+  baseURL: https://ibank.gcmutualbank.com.au/openbanking/cds-au/v1/banking/payees
+  properties:
+  - url: https://unity.bank/about-us/corporate-information/open-banking/
+    type: Documentation
+  - url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
+    type: APIReference
+  - url: openapi/gc-mutual-bank-cds-banking-products-openapi.yml
+    type: OpenAPI
+  description: Consumer-authorized Consumer Data Right payees surface exposing GET
+    /banking/payees (the member's saved payees list) and GET /banking/payees/{payeeId}
+    for full payee detail. Access requires an accredited data recipient (ADR) acting
+    on a consumer's authorization under the CDR consent model. The contract is the
+    shared DSB Consumer Data Standards CDR Banking API v1.36.0, not a bank-proprietary
     specification.
 common:
 - type: AgenticAccess
