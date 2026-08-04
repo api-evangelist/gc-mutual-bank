@@ -1,0 +1,26 @@
+{
+  "provider": "gc-mutual-bank",
+  "sources": [
+    "gc-mutual-bank-banking-account-balances-api-openapi.yml",
+    "gc-mutual-bank-banking-account-direct-debits-api-openapi.yml",
+    "gc-mutual-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "gc-mutual-bank-banking-account-transactions-api-openapi.yml",
+    "gc-mutual-bank-banking-accounts-api-openapi.yml",
+    "gc-mutual-bank-banking-payees-api-openapi.yml",
+    "gc-mutual-bank-banking-products-api-openapi.yml"
+  ],
+  "outputs": [
+    "gc-mutual-bank-banking-account-balances-api-openapi.yml",
+    "gc-mutual-bank-banking-account-direct-debits-api-openapi.yml",
+    "gc-mutual-bank-banking-account-scheduled-payments-api-openapi.yml",
+    "gc-mutual-bank-banking-account-transactions-api-openapi.yml",
+    "gc-mutual-bank-banking-accounts-api-openapi.yml",
+    "gc-mutual-bank-banking-payees-api-openapi.yml",
+    "gc-mutual-bank-banking-products-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
