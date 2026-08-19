@@ -37,7 +37,7 @@ tags:
 - Australia
 created: '2026-07-20'
 modified: '2026-07-21T00:00:00Z'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 apis:
 - aid: gc-mutual-bank:gc-mutual-bank-banking-account-balances-api
   name: G&C Mutual Bank Banking Account Balances API
