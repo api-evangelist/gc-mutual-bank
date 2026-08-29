@@ -219,6 +219,9 @@ apis:
   - type: APIReference
     url: https://consumerdatastandardsaustralia.github.io/standards/#cdr-banking-api_get-payees
 common:
+- type: CapabilityMap
+  url: capabilities/gc-mutual-bank-capability-edges.yml
+  name: G&C Mutual Bank Business Capability Map
 - type: AgenticAccess
   url: agentic-access/gc-mutual-bank-agentic-access.yml
 - type: DomainSecurity
