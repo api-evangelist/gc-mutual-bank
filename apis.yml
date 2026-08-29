@@ -13,6 +13,17 @@ description: G&C Mutual Bank is an Australian customer-owned mutual bank and aut
   Reference Data (PRD) API conforming to the Data Standards Body (DSB) Consumer Data
   Standards, alongside the authenticated consumer-data (accounts and transactions)
   surface that is restricted to accredited data recipients under the CDR ADR model.
+deliveryModel:
+  model: unknown
+  open_source: false
+  commercial: false
+  callable_host: false
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: self-serve
