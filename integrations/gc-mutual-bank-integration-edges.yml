@@ -1,0 +1,36 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/gc-mutual-bank/integrations
+- https://zapier.com/apps/g-c-mutual-bank/integrations
+- https://n8n.io/integrations/gc-mutual-bank/
+- https://composio.dev/toolkits/gc-mutual-bank
+- https://monid.ai/tools/gc-mutual-bank
+checked:
+- https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+- https://composio.dev/toolkits/gc-mutual-bank
+- https://monid.ai/tools/gc-mutual-bank
+- https://n8n.io/integrations/gc-mutual-bank/
+- https://zapier.com/apps/g-c-mutual-bank/integrations
+- https://zapier.com/apps/gc-mutual-bank/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: Consumer Data Right
+  partner: null
+  type: contract
+  channel: regulator-register
+  relationship: standard-participant
+  direction: partner-built
+  evidence: https://api.cdr.gov.au/cdr-register/v1/all/data-holders/brands/summary
+  contract_reference:
+    register: CDR Register (Australia, ACCC)
+    spec_file: null
+    role: data-holder
+    registered_name: Unity Bank
+    register_id: bf7df75a-52bf-eb11-a823-000d3a884a20
+    matched_domain: unity.bank
+    api_families: null
+    detected_by: sweep-standard-registers.py
+    detected: '2026-10-12'
+templates: []
